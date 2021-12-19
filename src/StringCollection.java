@@ -21,7 +21,6 @@ public class StringCollection {
         this.strings = new ArrayList<String>();
         this.size = size;
     }
-
     public void print() {
         System.out.println("Элементы:");
         for(String string: strings) {
@@ -101,14 +100,16 @@ public class StringCollection {
     }
 
     public void countElementsLength() {
-        String[] lengths = new String[strings.size()];
-        for (int i = 0; i < strings.size(); ++i) {
-            lengths[i] = strings.get(i).length() + " " +strings.get(i) ;
-        }
-        Arrays.sort(lengths);
-        for (int j = 0; j < lengths.length; ++j) {
-            System.out.print(lengths[j]);
-            System.out.println();
+        List<String> newList=new ArrayList<String>(strings);
+        Collections.sort(newList, new Comparator<String>() {
+            @Override
+            public int compare(String o1, String o2) {
+                return new Integer(o1.length()).compareTo(o2.length());
+            }
+        });
+        for (int j = 0; j < newList.size(); ++j) {
+            System.out.print(newList.get(j).length()+" ");
+            System.out.println(newList.get(j));
         }
     }
 
@@ -162,5 +163,3 @@ public class StringCollection {
         }
     }
 }
-
-
